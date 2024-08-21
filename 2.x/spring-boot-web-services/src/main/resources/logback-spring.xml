@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!-- 定义日志文件的存储路径及文件名 -->
+    <property name="LOG_FILE" value="${LOG_PATH:-./logs}/spring-boot-cxf.log"/>
+    <property name="PID" value="${PID:- }"/>
+
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 文件输出 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 在其他logger配置之前定义org.apache.cxf包的日志级别 -->
+    <logger name="org.apache.cxf" level="DEBUG">
+        <appender-ref ref="CONSOLE"/> <!-- 如果需要，可以指定只输出到控制台 -->
+        <appender-ref ref="FILE"/> <!-- 如果需要，可以指定同时输出到文件 -->
+    </logger>
+
+
+    <!-- Root Logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <!-- 更细粒度的logger配置可以在这里添加 -->
+</configuration>

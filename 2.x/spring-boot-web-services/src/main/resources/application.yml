@@ -1,0 +1,8 @@
+server:
+#  servlet:
+#    context-path: /portal
+  port: 31010
+spring:
+  webservices:
+    path: /portal/services
+

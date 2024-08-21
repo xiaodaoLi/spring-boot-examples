@@ -44,6 +44,9 @@
         <module>spring-boot-web</module>
         <module>spring-boot-web-thymeleaf</module>
         <module>spring-boot-webflux</module>
+        <module>spring-boot-cxf</module>
+        <module>spring-boot-web-services</module>
+        <module>webServiceTest</module>
     </modules>
 
     <build>

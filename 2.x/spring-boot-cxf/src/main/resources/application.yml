@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /portal
+  port: 34091
+
+
+cxf:
+  path: /services
+
+log4j:
+  logger:
+    org:
+      apache:
+        cxf: DEBUG
